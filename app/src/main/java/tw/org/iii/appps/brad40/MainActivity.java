@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraManager;
 import android.net.Uri;
@@ -133,6 +134,10 @@ public class MainActivity extends AppCompatActivity {
                 getPackageName() + ".provider",
                 new File(sdroot, "iii.jpg"));
 
+//        Uri uriFile = Uri.fromFile(
+//                new File(sdroot.getAbsoluteFile()+"/iii2.jpg"));
+
+
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, photoURI);
         startActivityForResult(intent, 4);
@@ -151,12 +156,26 @@ public class MainActivity extends AppCompatActivity {
                     Object obj = bundle.get(key);
                     Log.v("brad", obj.getClass().getName());
                 }
-
-
-
                 Bitmap bmp = (Bitmap) data.getExtras().get("data");
                 img.setImageBitmap(bmp);
+            }else if (requestCode == 4){
+
+                Bitmap bmp = BitmapFactory.decodeFile(
+                        sdroot.getAbsolutePath()+"/iii.jpg");
+                img.setImageBitmap(bmp);
+
+
+//                Uri photoURI = FileProvider.getUriForFile(
+//                        this,
+//                        getPackageName() + ".provider",
+//                        new File(sdroot, "iii.jpg"));
+//                img.setImageURI(photoURI);
             }
         }
+    }
+
+    public void test5(View view) {
+        Intent intent = new Intent(this, MyCameraActivity.class);
+        startActivity(intent);
     }
 }
