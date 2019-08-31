@@ -175,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void test5(View view) {
-        Intent intent = new Intent(this, MyCameraActivity.class);
+        Intent intent = new Intent(this, MyCameraXActivity.class);
         startActivity(intent);
     }
 }
